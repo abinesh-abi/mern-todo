@@ -3,14 +3,17 @@ const router = express.Router();
 const Task = require('../models/models')
 
 router.get('/',(req,res)=>{
-  const task = new Task({
-    todo:'good morning',
-    isCompleted:false
-  })
-  task.save((err,doc)=>{
-    if(err)console.log(err);
-    console.log(doc)
-  })
+Task.find()
+.then((val)=>res.json(val))
+.catch((err)=>console.log(err))
 })
+
+router.post('/',(req,res)=>{
+  const task = new Task(req.body)
+  task.save()
+  .then(val=>res.json(val))
+  .catch(err=>console.log(err))
+})
+
 
 module.exports = router;
