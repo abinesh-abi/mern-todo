@@ -24,6 +24,7 @@ router.put('/:id',(req,res)=>{
   })
 })
 router.delete('/:id',(req,res)=>{
+  console.log(req.params.id);
   Task.findByIdAndDelete(req.params.id,(err,doc)=>{
     if(err)console.log(err);
     res.json(doc)
