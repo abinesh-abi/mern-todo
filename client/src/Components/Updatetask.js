@@ -6,15 +6,16 @@ function Updatetask(props) {
   const [task,setTask]= useState(props.task.todo)
   const updateTask=()=>{
     if(task.trim()==='' || props.task.todo===task){
-      return
+      props.removePopup()
     }else{
       axios.put(`http://localhost:3333/${props.task._id}`,{
         _id:props.task._id,
         todo:task,
         isCompleted:props.task.isCompleted
       }).then(res=>{
+        console.log(res.data)
         props.removePopup()
-        props.updateTask(res.data)
+        props.updatetask(res.data)
       }).catch(err => console.log(err))
     }
   }
@@ -22,7 +23,7 @@ function Updatetask(props) {
     <div className="popup">
   <div className='popup-content'>
     <input type="text" placeholder="Update Tasks ..." value={task} onChange={event=>setTask(event.target.value)} />
-    <button onClick={()=>updateTask} >Update</button>
+    <button onClick={()=>updateTask()} >Update</button>
   </div>
 </div>
     )

@@ -21,6 +21,7 @@ router.put('/:id',(req,res)=>{
   },req.body,{new:true},(err,doc)=>{
     if(err)console.log(err);
     res.json(doc)
+    // console.log(doc,'doc')
   })
 })
 router.delete('/:id',(req,res)=>{

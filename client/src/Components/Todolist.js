@@ -8,6 +8,7 @@ import axios from 'axios'
 function Todolist(props) {
   return(
     <div className='tasklist'>
+    <ul>
     {props.todolist.map((task,index)=>{
     console.log(task,'task')
      const taskComplete = task=>{
@@ -26,18 +27,24 @@ function Todolist(props) {
        .catch(err=>console.log(err))
      }
       return(
+      
         <li key={index}>
           <div>
             <CheckIcon className={task.isCompleted ?'isCompleted':'checkicon'} />
             <p className={task.isCompleted ? 'taskcomplete':''} onClick={()=>taskComplete(task)}>{task.todo}</p>
           </div>
           <div>
-            <EditIcon className='edit' />
+            <EditIcon className='edit'onClick={()=>{
+              props.tasktoUpdate(task)
+              props.showPopup()
+            }} />
             <CloseIcon className='Close' onClick={()=>removeTask(task._id)} />
           </div>
         </li>
+        
       )
     })}
+    </ul>
     </div>
     )
 }
